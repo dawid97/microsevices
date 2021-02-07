@@ -1,0 +1,62 @@
+<div class="card-body">
+  <h3 class="card-title">Bookings</h3>
+  <div class="card-text">
+    <div class="form-group">
+      <input placeholder="Search" type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput
+        name="searchbar">
+    </div>
+    <div>
+      <div class="table-responsive">
+        <table mdbTable id="datatable" class="table table-sm bg-dark">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" aria-controls="datatable" scope="col"
+                [mdbTableSort]="bookings" [sortBy]="headElements[i]">
+                {{titleElements[i]}}
+                <mdb-icon fas icon="sort"></mdb-icon>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let booking of bookings; let i = index">
+              <td>{{booking.slot.startDate}}</td>
+              <td>{{booking.slot.startTime}}</td>
+              <td>{{booking.slot.finishDate}}</td>
+              <td>{{booking.slot.finishTime}}</td>
+              <td>{{booking.resource.name}}</td>
+              <td>{{booking.resource.type}}</td>
+              <td>{{booking.user.ssn}}</td>
+              <td style="white-space: nowrap">
+                <div class="buttonRight">
+                  <button type=" button" class="btn btn-secondary" (click)="detailsClicked(booking.id)">
+                    Details</button>
+                  &nbsp;
+                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#popup"
+                    (click)="selectedItem = booking.id">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="popup">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h2 class="modal-title">Please confirm</h2>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="removeBookClicked()" data-dismiss="modal" type="button"
+          class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

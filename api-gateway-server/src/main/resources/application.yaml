@@ -1,0 +1,76 @@
+spring:
+  zipkin:
+    base-url: http://zipkin-server:9411/
+  application:
+    name: api-gateway-server
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-server:8761/eureka
+    register-with-eureka: false
+    fetch-registry: true
+
+server:
+  port: 8765
+
+zuul:
+  ignoredServices: '*'
+  prefix: /api
+  routes:
+    user-service:
+      path: /user-service/**
+      service-id: user-service
+      sensitive-headers:
+        - Cookie,Set-Cookie
+    resource-service:
+      path: /resource-service/**
+      service-id: resource-service
+      sensitive-headers:
+        - Cookie,Set-Cookie
+    booking-service:
+      path: /booking-service/**
+      service-id: booking-service
+      sensitive-headers:
+        - Cookie,Set-Cookie
+  host:
+    socket-timeout-millis: 30000
+    connect-timeout-millis: 30000
+    max-per-route-connections: 10000
+    max-total-connections: 5000
+    time-to-live: -1
+  semaphore:
+    max-semaphores: 500
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+
+ribbon:
+  ReadTimeout: 60000
+  connection-timeout: 3000
+  eureka:
+    enabled: true
+
+#zuul.host.socket-timeout-millis=100000
+#zuul.host.connect-timeout-millis=100000
+#spring.sleuth.sampler.probability=1.0
+#spring.zipkin.base-url=http://zipkin-server:9411/
+
+
+#zuul.ribbon.eager-load.enabled= true
+
+
+#zuul.sensitive-headers=Cookie,Set-Cookie
+
+#hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds= 11000
+#feign.client.config.default.connectTimeout=50000
+#feign.client.config.default.readTimeout=50000
+#ribbon.ConnectTimeout= 60000
+
+#ribbon:
+ # ReadTimeout: 60000

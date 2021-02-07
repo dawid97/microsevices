@@ -1,0 +1,16 @@
+.card-body {
+  color: white;
+  font-size: 100px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  opacity: 0.5;
+  margin-left: -10px;
+  margin-top: 100px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

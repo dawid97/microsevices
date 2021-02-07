@@ -1,0 +1,61 @@
+.card-body {
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+}
+
+table {
+  border-radius: 25px;
+  overflow:hidden;
+  color: white;
+  opacity: 0.9;
+}
+
+button {
+  border-radius: 10px;
+}
+
+input {
+  border-radius: 10px;
+  max-width: 290px;
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+
+.card-title {
+  text-align: left;
+  font-size: 25px;
+  opacity: 0.6;
+}
+
+.form-group {
+  max-width: 300px;
+}
+
+.modal-content{
+  border-radius: 20px;
+}
+
+.modal-dialog {
+  margin-top: 200px;
+  opacity: 0.9;
+  border: solid rgb(255, 255, 255, 0.8);
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+}
+
+.buttonRight{
+  float: right;
+}
+

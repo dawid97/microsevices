@@ -1,0 +1,93 @@
+<div class="col-md-12">
+  <div class="card-body">
+    <h2 class="registrationTitle">Registration</h2>
+    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3"
+          maxlength="20" #name="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && name.invalid">
+          <div *ngIf="name.errors.required">Name is required</div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 3 characters
+          </div>
+          <div *ngIf="name.errors.maxlength">
+            Name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input type="text" class="form-control" name="surname" [(ngModel)]="form.surname" required minlength="3"
+          maxlength="20" #surname="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && surname.invalid">
+          <div *ngIf="surname.errors.required">Surname is required</div>
+          <div *ngIf="surname.errors.minlength">
+            Surname must be at least 3 characters
+          </div>
+          <div *ngIf="surname.errors.maxlength">
+            Surname must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
+          #email="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.email">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ssn">Ssn</label>
+        <input type="text" class="form-control" name="ssn" [(ngModel)]="form.ssn" required minlength="9" maxlength="9"
+          #ssn="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && ssn.invalid">
+          <div *ngIf="ssn.errors.required">Ssn is required</div>
+          <div *ngIf="ssn.errors.minlength">
+            Ssn must be at least 9 characters
+          </div>
+          <div *ngIf="ssn.errors.maxlength">
+            Ssn must be at most 9 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+          #password="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm password</label>
+        <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="form.confirmPassword" required
+          minlength="6" #confirmPassword="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && confirmPassword.invalid">
+          <div *ngIf="confirmPassword.errors.required">Confirm Password is required</div>
+          <div *ngIf="confirmPassword.errors.minlength">
+            Confirm password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Sign Up</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+        Signup failed!<br />{{ errorMessage }}
+      </div>
+    </form>
+    <div class="alert alert-success" *ngIf="isSuccessful">
+      Your registration is successful! Confirm your email
+    </div>
+    <button *ngIf="isSuccessful" class="btn btn-primary btn-block" (click)="okClicked()">OK</button>
+  </div>
+</div>

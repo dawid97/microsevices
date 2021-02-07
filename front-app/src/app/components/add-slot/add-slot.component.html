@@ -1,0 +1,57 @@
+<div class="col-md-12">
+  <div class="card-body">
+    <h2 class="registrationTitle">Add Slot</h2>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="startTime">Start Time</label>
+        <input matInput [min]="minDate" type="text" class="form-control" name="startTime" [(ngModel)]="form.startTime"
+          #startTime="ngModel" matInput readonly=true [ngxMatDatetimePicker]="pickerStartDate" required
+          (click)="openPickerStartDate()">
+        <ngx-mat-datetime-picker #pickerStartDate></ngx-mat-datetime-picker>
+        <div class="alert-danger" *ngIf="f.submitted && startTime.invalid">
+          <div *ngIf="startTime.errors.required">Start time is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="finishTime">Finish time</label>
+        <input matInput [min]="minDate" type="text" class="form-control" name="finishTime" [(ngModel)]="form.finishTime"
+          #finishTime="ngModel" matInput readonly=true [ngxMatDatetimePicker]="pickerFinishDate" required
+          (click)="openPickerFinishDate()">
+        <ngx-mat-datetime-picker #pickerFinishDate></ngx-mat-datetime-picker>
+        <div class="alert-danger" *ngIf="f.submitted && finishTime.invalid">
+          <div *ngIf="finishTime.errors.required">Finish time is required</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="divisior">Divisior</label>
+        <input readonly=true type="text" class="form-control" name="divisior" [value]="displayValue" required
+          minlength="3" maxlength="20" />
+        <mat-slider min="0" max="300" step="1" (input)="pitch($event)" value="1"></mat-slider>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" data-toggle="modal" data-backdrop="static" data-keyboard="false"
+          data-target="#exampleModalScrollable" (click)="setDefaultInformation()">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">{{modalTitle}}</h5>
+      </div>
+      <div class="modal-body">
+        <pre>
+        {{information}}
+      </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="okClicked()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

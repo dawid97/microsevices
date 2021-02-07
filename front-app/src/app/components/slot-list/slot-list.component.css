@@ -1,0 +1,91 @@
+.card-body {
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+}
+
+.card-title {
+  width: 50%;
+  float: left;
+  font-size: 25px;
+}
+
+input {
+  border-radius: 10px;
+  max-width: 290px;
+  opacity: 0.9;
+}
+
+table {
+  border-radius: 25px;
+  overflow:hidden;
+  color: white;
+  opacity: 0.9;
+}
+
+button {
+  border-radius: 10px;
+}
+
+.btn {
+  color: white;
+  opacity: 0.9;
+}
+
+.card-resource {
+  margin-left: 50%;
+  text-align: right;
+  font-size: 25px;
+}
+
+.form-group {
+  display: inline-block;
+  width: 100%;
+}
+
+.slot-add {
+  margin-left: 50%;
+  text-align: right;
+}
+
+.headers {
+  width: 100%;
+  padding-bottom: 15px;
+  opacity: 0.6;
+}
+
+.modal-content{
+  border-radius: 20px;
+}
+
+.modal-dialog {
+  border: solid rgb(255, 255, 255, 0.8);
+  opacity: 0.9;
+  color: white;
+  margin-top: 200px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+}
+
+.slot-free {
+  background-color: rgb(98, 161, 98);
+}
+
+.slot-booked {
+  background-color:rgb(177, 67, 67);
+}
+
+.buttonRight{
+  float: right;
+}
+

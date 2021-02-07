@@ -1,0 +1,93 @@
+.card-body {
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+}
+
+button {
+  border-radius: 10px;
+  color: white;
+  opacity: 0.9;
+}
+
+.buttonRight{
+  float: right;
+}
+
+table {
+  border-radius: 25px;
+  overflow:hidden;
+  color: white;
+  opacity: 0.9;
+}
+
+.input-customer {
+  border-radius: 10px;
+  max-width: 290px;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+.input-not-customer {
+  border-radius: 10px;
+  max-width: 290px;
+  opacity: 0.9;
+  margin-bottom: -25px;
+}
+
+/* input {
+  border-radius: 10px;
+  max-width: 290px;
+  opacity: 0.9;
+  margin-bottom: -25px;
+} */
+
+.form-group {
+  display: inline-block;
+  width: 100%;
+}
+
+.modal-content{
+  border-radius: 20px;
+  opacity: 0.9;
+}
+
+.modal-dialog {
+  border: solid rgb(255, 255, 255, 0.8);
+  margin-top: 200px;
+  color: white;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+}
+
+.card-title {
+  width: 50%;
+  float: left;
+  font-size: 25px;
+  opacity: 0.6;
+}
+
+.resource-add {
+  margin-left: 50%;
+  text-align: right;
+}
+
+.headers {
+  width: 100%;
+}
+
+.btn {
+  color: white;
+  opacity: 0.9;
+}
+

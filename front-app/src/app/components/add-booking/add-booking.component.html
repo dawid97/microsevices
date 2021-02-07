@@ -1,0 +1,62 @@
+<div class="col-md-12">
+  <div class="card-body">
+    <h2 class="registrationTitle">Add Booking</h2>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <h5 class="elementTitle bg-dark">Customer</h5>
+      <div class="form-group">
+        <label for="customer">Customer</label>
+        <input class="form-control" name="customer" [(ngModel)]="form.customer" matInput type="text" aria-label="Number"
+          [formControl]="selectedCustomer" [matAutocomplete]="auto" required>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let customer of filteredCustomers | async" [value]="customer">{{customer}}</mat-option>
+        </mat-autocomplete>
+      </div>
+      <h5 class="elementTitle bg-dark">Slot</h5>
+      <div class="form-group">
+        <label for="startTime">Start Time</label>
+        <input *ngIf="slotIsPresent" readonly=true type="text" class="form-control" [value]="slot.startTime"
+          name="startTime" />
+      </div>
+      <div class="form-group">
+        <label for="finishTime">Finish Time</label>
+        <input *ngIf="slotIsPresent" readonly=true type="text" class="form-control" [value]="slot.finishTime"
+          name="finishTime" />
+      </div>
+      <h5 class="elementTitle bg-dark">Resource</h5>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input *ngIf="resourceIsPresent" readonly=true type="text" class="form-control" [value]="resource.name"
+          name="name" />
+      </div>
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input *ngIf="resourceIsPresent" readonly=true type="text" class="form-control" [value]="resource.type"
+          name="type" />
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" data-backdrop="static" data-keyboard="false"
+          data-target="#exampleModalScrollable" data-toggle="modal">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">{{modalTitle}}</h5>
+      </div>
+      <div class="modal-body">
+        <pre>
+        {{information}}
+      </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="okClicked()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

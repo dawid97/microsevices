@@ -1,0 +1,46 @@
+.card-body{
+  max-width: 500px;
+  max-height: 800px;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-top: 10px;
+  color: white;
+  border: solid rgb(255, 255, 255, 0.8);
+  margin: 80px auto;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-radius: 25px;
+}
+
+button {
+  border-radius: 10px;
+}
+
+.registrationTitle{
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.alert-danger {
+  margin-top: 3px;
+  border-radius: 6px;
+  text-align: center;
+}
+
+input {
+  border-radius: 10px;
+}
+
+.alert-warning {
+  border-radius: 10px;
+  text-align: center;
+}
+
+.alert-success {
+  border-radius: 10px;
+  text-align: center;
+}

@@ -1,0 +1,90 @@
+<div class="card-body">
+  <div class="headers">
+    <h2 class="card-title">
+      Slots
+    </h2>
+    <h2 *ngIf="resource" class="card-resource">
+      {{resource.name}} {{resource.type}}
+    </h2>
+  </div>
+  <div class="card-text">
+    <div class="form-group">
+      <div class="card-title">
+        <input placeholder="Search" type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput
+          name="searchbar">
+      </div>
+      <div class="slot-add">
+        <button *ngIf="!currentUser.authorities.includes('ROLE_CUSTOMER')" class="btn bg-dark"
+          (click)="addSlotClicked()">Add</button>
+      </div>
+    </div>
+    <div>
+      <div class="table-responsive">
+        <table mdbTable id="datatable" class="table table-sm bg-dark">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" aria-controls="datatable" scope="col"
+                [mdbTableSort]="slots" [sortBy]="headElements[i]">
+                {{titleElements[i]}}
+                <mdb-icon fas icon="sort"></mdb-icon>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr [ngClass]="{'slot-free':slot.isBooked === 'No', 'slot-booked':slot.isBooked === 'Yes'}"
+              *ngFor="let slot of slots; let i = index">
+              <td>{{slot.startDate}}</td>
+              <td>{{slot.startTime}}</td>
+              <td>{{slot.finishDate}}</td>
+              <td>{{slot.finishTime}}</td>
+              <td>{{slot.isBooked}}</td>
+              <td style="white-space: nowrap">
+                <div class="buttonRight">
+                  <button *ngIf=" slot.isBooked==='No' && !currentUser.authorities.includes('ROLE_RESOURCE')"
+                    type=" button" class="btn btn-secondary" data-toggle="modal" data-backdrop="static"
+                    data-keyboard="false" (click)="bookClicked(slot.id)" data-target="#popup">
+                    Book</button>
+                  &nbsp;
+                  <button *ngIf="!currentUser.authorities.includes('ROLE_CUSTOMER')" class="btn btn-danger"
+                    (click)="selectedItem = slot.id" data-toggle="modal" data-target="#removePopup">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="currentUser.authorities.includes('ROLE_CUSTOMER')" class="modal fade" id="popup">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h2 class="modal-title">Information</h2>
+      </div>
+      <div class="modal-body">
+        <p>{{information}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" (click)="redirect()" class="btn btn-primary">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="removePopup">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h2 class="modal-title">Please confirm</h2>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" (click)="removeSlotClicked()"
+          class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,68 @@
+<div class="card-body">
+  <div div class="headers">
+    <h2 class="card-title">
+      Resources
+    </h2>
+  </div>
+  <div class="card-text">
+    <div class="form-group">
+      <div
+        [ngClass]="{'input-customer':currentUser.authorities.includes('ROLE_CUSTOMER'), 'input-not-customer':!currentUser.authorities.includes('ROLE_CUSTOMER')}"
+        class="inputCustomer">
+        <input placeholder="Search" type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput
+          name="searchbar">
+      </div>
+      <div class="resource-add">
+        <button *ngIf="!currentUser.authorities.includes('ROLE_CUSTOMER')" class="btn bg-dark"
+          (click)="addResourceClicked()">Add</button>
+      </div>
+    </div>
+    <div>
+      <div class="table-responsive">
+        <table mdbTable id="datatable" class="table table-sm bg-dark">
+          <thead>
+            <tr>
+              <th *ngFor="let head of headElements; let i = index" aria-controls="datatable" scope="col"
+                [mdbTableSort]="resources" [sortBy]="headElements[i]">
+                {{head | titlecase}}
+                <mdb-icon fas icon="sort"></mdb-icon>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let resource of resources; let i = index">
+              <td>{{resource.name}}</td>
+              <td>{{resource.type}}</td>
+              <td>
+                <div class="buttonRight">
+                  <button class="btn btn-secondary" (click)="slotsClicked(resource.id)">Slots</button>
+                  &nbsp;
+                  <button *ngIf="!currentUser.authorities.includes('ROLE_CUSTOMER')"
+                    (click)="selectedItem = resource.id" data-toggle="modal" data-target="#popup"
+                    class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="popup">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h2 class="modal-title">Please confirm</h2>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+      </div>
+      <div class="modal-footer">
+        <button (click)="deleteResourceClicked()" data-dismiss="modal" type="button"
+          class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>

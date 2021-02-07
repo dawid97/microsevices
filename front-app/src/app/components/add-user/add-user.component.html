@@ -1,0 +1,117 @@
+<div class="col-md-12">
+  <div class="card-body">
+    <h2 class="registrationTitle">Add User</h2>
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" name="name" [(ngModel)]="form.name" required minlength="3"
+          maxlength="20" #name="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && name.invalid">
+          <div *ngIf="name.errors.required">Name is required</div>
+          <div *ngIf="name.errors.minlength">
+            Name must be at least 3 characters
+          </div>
+          <div *ngIf="name.errors.maxlength">
+            Name must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="surname">Surname</label>
+        <input type="text" class="form-control" name="surname" [(ngModel)]="form.surname" required minlength="3"
+          maxlength="20" #surname="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && surname.invalid">
+          <div *ngIf="surname.errors.required">Surname is required</div>
+          <div *ngIf="surname.errors.minlength">
+            Surname must be at least 3 characters
+          </div>
+          <div *ngIf="surname.errors.maxlength">
+            Surname must be at most 20 characters
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentUser.authorities.includes('ROLE_ADMIN')" class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email
+          #email="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && email.invalid">
+          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors.email">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="ssn">Ssn</label>
+        <input type="text" class="form-control" name="ssn" [(ngModel)]="form.ssn" required minlength="9" maxlength="9"
+          #ssn="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && ssn.invalid">
+          <div *ngIf="ssn.errors.required">Ssn is required</div>
+          <div *ngIf="ssn.errors.minlength">
+            Ssn must be at least 9 characters
+          </div>
+          <div *ngIf="ssn.errors.maxlength">
+            Ssn must be at most 9 characters
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentUser.authorities.includes('ROLE_ADMIN')" class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+          #password="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && password.invalid">
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors.minlength">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentUser.authorities.includes('ROLE_ADMIN')" class="form-group">
+        <label for="confirmPassword">Confirm password</label>
+        <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="form.confirmPassword" required
+          minlength="6" #confirmPassword="ngModel" />
+        <div class="alert-danger" *ngIf="f.submitted && confirmPassword.invalid">
+          <div *ngIf="confirmPassword.errors.required">Confirm Password is required</div>
+          <div *ngIf="confirmPassword.errors.minlength">
+            Confirm password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentUser.authorities.includes('ROLE_ADMIN')" class="form-group">
+        <label for="role">Role</label>
+        <input class="form-control" name="role" [(ngModel)]="selectedRole" #role="ngModel" [(ngModel)]="form.role"
+          matInput type="text" aria-label="Number" [matAutocomplete]="auto" required>
+        <div class="alert-danger" *ngIf="f.submitted && role.invalid">
+          <div *ngIf="role.errors.required">Role is required</div>
+        </div>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let role of roles" [value]="role">{{role}}
+          </mat-option>
+        </mat-autocomplete>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block" data-target="#exampleModalScrollable" data-toggle="modal"
+          (click)="setDefaultInformation()" data-backdrop="static" data-keyboard="false">Add</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">{{modalTitle}}</h5>
+      </div>
+      <div class="modal-body">
+        <pre>
+        {{information}}
+      </pre>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="okClicked()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

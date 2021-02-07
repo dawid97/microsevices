@@ -1,0 +1,104 @@
+version: '3.7'
+services:
+
+  discovery-server:
+    build: ./discovery-server
+    ports:
+      - "8761:8761"
+    networks:
+      - microservices-network
+      
+  front-app:
+    build: ./front-app
+    ports:
+      - "4200:4200"
+      - "49153:49153"
+    volumes:
+      - "/front-app/app/node_modules"
+      - "./front-app:/app"
+     
+  database-resource:
+    image: postgres
+    ports:
+      - "2345:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=resource_db
+    networks:
+      - microservices-network
+     
+  database-user:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=user_db
+    networks:
+      - microservices-network
+      
+  database-booking:
+    image: postgres
+    ports:
+      - "2222:5432"
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=booking_db
+    networks:
+      - microservices-network
+ 
+  zipkin-server:
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - microservices-network
+     
+  user-service:
+    build: ./user-service
+    ports:
+      - "8082:8082"
+    depends_on:
+      - discovery-server
+      - zipkin-server
+      - database-user
+    networks:
+      - microservices-network
+      
+  resource-service:
+    build: ./resource-service
+    ports:
+      - "8086:8086"
+    depends_on:
+      - discovery-server
+      - zipkin-server
+      - database-resource
+    networks:
+      - microservices-network
+      
+  booking-service:
+    build: ./booking-service
+    ports:
+      - "8089:8089"
+    depends_on:
+      - discovery-server
+      - zipkin-server
+      - database-booking
+    networks:
+      - microservices-network
+      
+  api-gateway-server:
+    build: ./api-gateway-server
+    ports:
+      - "8765:8765"
+    depends_on:
+      - discovery-server
+      - zipkin-server
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:

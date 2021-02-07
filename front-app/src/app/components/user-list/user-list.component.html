@@ -1,0 +1,83 @@
+<div class="card-body">
+  <div div class="headers">
+    <h2 class="card-title">
+      Users
+    </h2>
+  </div>
+  <div class="card-text">
+    <div class="form-group">
+      <input placeholder="Search" type="text" [(ngModel)]="searchText" class="form-control" id="search" mdbInput
+        name="searchbar">
+      <div class="resource-add">
+        <button (click)="addUserClicked()" class="btn bg-dark">Add</button>
+      </div>
+    </div>
+    <div>
+      <div class="table-responsive">
+        <table mdbTable id="datatable" class="table table-sm bg-dark">
+          <thead>
+            <tr *ngIf="currentUser.authorities.includes('ROLE_ADMIN')">
+              <th *ngFor="let head of headElements; let i = index" aria-controls="datatable" scope="col"
+                [mdbTableSort]="users" [sortBy]="headElements[i]">
+                {{head | titlecase}}
+                <mdb-icon fas icon="sort"></mdb-icon>
+              </th>
+            </tr>
+            <tr *ngIf="currentUser.authorities.includes('ROLE_STAFF')">
+              <th *ngFor="let head of headElements; let i = index" aria-controls="datatable" scope="col"
+                [mdbTableSort]="customers" [sortBy]="headElements[i]">
+                {{head | titlecase}}
+                <mdb-icon fas icon="sort"></mdb-icon>
+              </th>
+            </tr>
+          </thead>
+          <tbody *ngIf="currentUser.authorities.includes('ROLE_ADMIN')">
+            <tr *ngFor="let user of users; let i = index">
+              <td>{{user.name}}</td>
+              <td>{{user.surname}}</td>
+              <td>{{user.ssn}}</td>
+              <td>{{user.email}}</td>
+              <td>
+                <div class="buttonRight">
+                  <button (click)="selectedItem = user.id" data-toggle="modal" data-target="#popup"
+                    class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="currentUser.authorities.includes('ROLE_STAFF')">
+            <tr *ngFor="let customer of customers; let i = index">
+              <td>{{customer.name}}</td>
+              <td>{{customer.surname}}</td>
+              <td>{{customer.ssn}}</td>
+              <td>{{customer.email}}</td>
+              <td>
+                <div class="buttonRight">
+                  <button (click)="selectedItem = customer.id" data-toggle="modal" data-target="#popup"
+                    class="btn btn-danger">Delete</button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="popup">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark">
+      <div class="modal-header">
+        <h2 class="modal-title">Please confirm</h2>
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete?</p>
+      </div>
+      <div class="modal-footer">
+        <button data-dismiss="modal" type="button" (click)="deleteUserClicked()"
+          class="btn btn-primary">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
